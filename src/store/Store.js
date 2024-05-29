@@ -24,6 +24,7 @@ export class Store {
     this.maxTime = 30 * 1000;
     this.playing = false;
     this.currentKeyFrame = 0;
+    this.zoompercent = 100;
     this.selectedElement = null;
     this.fps = 60;
     this.animations = [];
@@ -39,6 +40,14 @@ export class Store {
 
   setCurrentTimeInMs(time) {
     this.currentKeyFrame = Math.floor((time / 1000) * this.fps);
+  }
+
+  zoomInTimeline() {
+    this.zoompercent += 10;
+  }
+
+  zoomOutTimeline() {
+    this.zoompercent -= 10;
   }
 
   setSelectedMenuOption(selectedMenuOption) {

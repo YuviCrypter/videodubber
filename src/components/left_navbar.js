@@ -147,7 +147,7 @@ const LeftNavbar = observer(() => {
   });
 
   return (
-    <ScrollArea
+    <Stack
       h={"100vh"}
       gap={0}
       style={{ borderRight: "1px solid var(--mantine-color-gray-3)" }}
@@ -156,16 +156,16 @@ const LeftNavbar = observer(() => {
         <IconMenu2 type="mark" size={16} />
       </Center>
 
-      <div className={classes.navbarMain}>
+      <ScrollArea scrollbars="y" className={classes.navbarMain}>
         <Stack justify="center" gap={0}>
           {links}
         </Stack>
-      </div>
+      </ScrollArea>
 
       <Stack justify="center" gap={0} my={8}>
         <NavbarLink icon={IconQuestionMark} style={{ borderRadius: "50%" }} />
       </Stack>
-    </ScrollArea>
+    </Stack>
   );
 });
 

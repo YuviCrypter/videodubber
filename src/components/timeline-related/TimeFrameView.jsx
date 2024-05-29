@@ -117,6 +117,7 @@ export const TimeFrameView = observer((props) => {
         disabled={disabled}
         style={{
           position: "relative",
+          height: 50,
           width: `${
             ((element.timeFrame.end - element.timeFrame.start) /
               store.maxTime) *
@@ -124,7 +125,7 @@ export const TimeFrameView = observer((props) => {
           }%`,
 
           outline: isSelected
-            ? "4px solid var(--mantine-color-orange-3)"
+            ? "4px solid var(--mantine-color-indigo-6)"
             : "none",
           borderRadius: isSelected ? 2 : 0,
         }}

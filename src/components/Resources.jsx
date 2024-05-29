@@ -3,7 +3,7 @@ import React from "react";
 import { StoreContext } from "@/store";
 import { observer } from "mobx-react";
 import { VideoResourcesPanel } from "./panels/VideoResourcesPanel";
-import { Box, Text } from "@mantine/core";
+import { Box, Flex, Text } from "@mantine/core";
 
 export const Resources = observer(() => {
   const store = React.useContext(StoreContext);
@@ -21,8 +21,10 @@ export const Resources = observer(() => {
   };
 
   return (
-    <Box
-      h={"100%"}
+    <Flex
+      direction={"column"}
+      // h={"100%"}
+      flex={"0 1"}
       bg={"white"}
       style={{ borderRight: "1px solid var(--mantine-color-gray-2)" }}
     >
@@ -30,6 +32,6 @@ export const Resources = observer(() => {
         {labels[selectedMenuOption]}
       </Text>
       {selectedMenuOption === "Media" ? <VideoResourcesPanel /> : null}
-    </Box>
+    </Flex>
   );
 });

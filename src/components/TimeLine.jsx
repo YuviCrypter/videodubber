@@ -38,6 +38,7 @@ export const TimeLine = observer(() => {
         <ScaleRangeInput
           max={store.maxTime}
           value={store.currentTimeInMs}
+          zoompercent={store.zoompercent}
           onChange={(value) => {
             store.handleSeek(value);
           }}
@@ -46,7 +47,7 @@ export const TimeLine = observer(() => {
         />
         {/* </Flex> */}
 
-        <ScrollArea scrollbars="y">
+        <ScrollArea flex={1} mah={150} scrollbars="y">
           <Box style={{ position: "relative" }}>
             {store.editorElements.map((element) => {
               return <TimeFrameView key={element.id} element={element} />;

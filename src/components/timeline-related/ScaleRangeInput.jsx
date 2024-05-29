@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@mantine/core";
+import { Box, Flex, Text } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 
 export const ScaleRangeInput = (props) => {
@@ -26,28 +26,28 @@ export const ScaleRangeInput = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (ref.current) {
-      const canvas = ref.current;
-      canvas.width = canvasSize.width;
-      canvas.height = canvasSize.height;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = props.backgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        props.markings.forEach((marking) => {
-          ctx.strokeStyle = marking.color;
-          ctx.lineWidth = marking.width;
-          ctx.beginPath();
-          for (let i = 0; i < max; i += marking.interval) {
-            ctx.moveTo((i / max) * canvas.width, 0);
-            ctx.lineTo((i / max) * canvas.width, marking.size);
-          }
-          ctx.stroke();
-        });
-      }
-    }
-  }, [props.markings, props.backgroundColor, max, canvasSize]);
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     const canvas = ref.current;
+  //     canvas.width = canvasSize.width;
+  //     canvas.height = canvasSize.height;
+  //     const ctx = canvas.getContext("2d");
+  //     if (ctx) {
+  //       ctx.fillStyle = props.backgroundColor;
+  //       ctx.fillRect(0, 0, canvas.width, canvas.height);
+  //       props.markings.forEach((marking) => {
+  //         ctx.strokeStyle = marking.color;
+  //         ctx.lineWidth = marking.width;
+  //         ctx.beginPath();
+  //         for (let i = 0; i < max; i += marking.interval) {
+  //           ctx.moveTo((i / max) * canvas.width, 0);
+  //           ctx.lineTo((i / max) * canvas.width, marking.size);
+  //         }
+  //         ctx.stroke();
+  //       });
+  //     }
+  //   }
+  // }, [props.markings, props.backgroundColor, max, canvasSize]);
 
   const updateFromMouseEvent = (e) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -80,7 +80,22 @@ export const ScaleRangeInput = (props) => {
         refIsMouseDown.current = false;
       }}
     >
-      <canvas height={2} ref={ref}></canvas>
+      {/* <canvas height={2} ref={ref}></canvas> */}
+      <Flex h={16} justify={"space-evenly"} ref={ref}>
+        {Array(parseInt((canvasSize.width * props.zoompercent) / 1000))
+          .fill(1)
+          .map((mark, index) => {
+            if (index % 10 == 0) {
+              return (
+                <Text w={2} size="xs">
+                  {index}s
+                </Text>
+              );
+            } else {
+              return <Box h={2} w={2} bg={"black"}></Box>;
+            }
+          })}
+      </Flex>
       <Box
         bg={"var(--mantine-color-violet-7)"}
         w={2}
@@ -89,9 +104,7 @@ export const ScaleRangeInput = (props) => {
         left={0}
         h={"100%"}
         style={{
-          transform: `translateX(${
-            (value / max) * canvasSize.width
-          }px)`,
+          transform: `translateX(${(value / max) * canvasSize.width}px)`,
           borderRadius: 50,
         }}
       ></Box>

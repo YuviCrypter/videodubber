@@ -17,33 +17,48 @@ export const SeekPlayer = observer((_props) => {
   const formattedMaxTime = formatTimeToMinSecMili(store.maxTime);
   return (
     // <Flex direction={"column"}>
-      <Flex
-        gap={4}
-        align={"center"}
-        justify={"center"}
-        px={8}
-        className="flex flex-row items-center px-2"
+    <Flex
+      gap={4}
+      align={"center"}
+      justify={"center"}
+      // px={8}
+      // className="flex flex-row items-center px-2"
+    >
+      <Button
+        c={"black"}
+        bg={"var(--mantine-color-gray-2)"}
+        radius={40}
+        p={8}
+        m={8}
+        onClick={() => {
+          store.setPlaying(!store.playing);
+        }}
       >
-        <Button
-          c={"black"}
-          bg={"var(--mantine-color-gray-2)"}
-          radius={40}
-          p={8}
-          m={8}
-          onClick={() => {
-            store.setPlaying(!store.playing);
-          }}
-        >
-          <Icon size="sm"></Icon>
-        </Button>
-        <Text fw={500} size="sm">
-          {formattedTime}{" "}
-        </Text>
-        <Text> / </Text>
-        <Text fw={500} size="sm">
-          {" "}
-          {formattedMaxTime}
-        </Text>
-      </Flex>
+        <Icon size="sm"></Icon>
+      </Button>
+      <Text fw={500} size="sm">
+        {formattedTime}{" "}
+      </Text>
+      <Text> / </Text>
+      <Text fw={500} size="sm">
+        {" "}
+        {formattedMaxTime}
+      </Text>
+
+      <Button
+        onClick={() => {
+          store.zoomInTimeline();
+        }}
+      >
+        +
+      </Button>
+      <Button
+        onClick={() => {
+          store.zoomOutTimeline();
+        }}
+      >
+        -
+      </Button>
+    </Flex>
   );
 });
