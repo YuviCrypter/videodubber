@@ -7,23 +7,8 @@ import {
   IconPlayerPlayFilled,
   IconPlayerPauseFilled,
 } from "@tabler/icons-react";
-import { ScaleRangeInput } from "./ScaleRangeInput";
-import { Flex, Button, Box, Text } from "@mantine/core";
 
-const MARKINGS = [
-  {
-    interval: 5000,
-    color: "black",
-    size: 4,
-    width: 1,
-  },
-  {
-    interval: 1000,
-    color: "black",
-    size: 1,
-    width: 1,
-  },
-];
+import { Flex, Button, Box, Text } from "@mantine/core";
 
 export const SeekPlayer = observer((_props) => {
   const store = useContext(StoreContext);
@@ -31,7 +16,7 @@ export const SeekPlayer = observer((_props) => {
   const formattedTime = formatTimeToMinSecMili(store.currentTimeInMs);
   const formattedMaxTime = formatTimeToMinSecMili(store.maxTime);
   return (
-    <Flex direction={"column"}>
+    // <Flex direction={"column"}>
       <Flex
         gap={4}
         align={"center"}
@@ -60,15 +45,5 @@ export const SeekPlayer = observer((_props) => {
           {formattedMaxTime}
         </Text>
       </Flex>
-      <ScaleRangeInput
-        max={store.maxTime}
-        value={store.currentTimeInMs}
-        onChange={(value) => {
-          store.handleSeek(value);
-        }}
-        markings={MARKINGS}
-        backgroundColor="white"
-      />
-    </Flex>
   );
 });

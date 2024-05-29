@@ -1,19 +1,32 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { StoreContext } from "@/store";
 import { observer } from "mobx-react";
 import { VideoResource } from "../entity/VideoResource";
-import { Text, Stack, useMantineTheme, Group } from "@mantine/core";
+import {
+  Text,
+  Stack,
+  useMantineTheme,
+  Group,
+  Flex,
+  ScrollArea,
+} from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
 
 export const VideoResourcesPanel = observer(() => {
   const theme = useMantineTheme();
   const store = React.useContext(StoreContext);
+
+  // const [newVideo, setNewVideo] = useState(null);
+
   const handleFileChange = (files) => {
     const file = files?.[0];
     if (!file) return;
-    store.addVideoResource(URL.createObjectURL(file));
+    const url = URL.createObjectURL(file);
+    store.addVideoResource(url);
+    // setNewVideo(url);
   };
+
   return (
     <>
       <Dropzone
@@ -90,9 +103,20 @@ export const VideoResourcesPanel = observer(() => {
           </Group>
         </Stack>
       </Dropzone>
-      {store.videos.map((video, index) => {
-        return <VideoResource key={video} video={video} index={index} />;
-      })}
+      <ScrollArea maw={400} mah={120} scrollbars="x">
+        <Flex>
+          {store.videos.map((video, index) => {
+            return (
+              <VideoResource
+                key={video}
+                video={video}
+                index={index}
+                // newVideo={newVideo}
+              />
+            );
+          })}
+        </Flex>
+      </ScrollArea>
     </>
   );
 });

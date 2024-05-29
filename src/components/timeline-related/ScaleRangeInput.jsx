@@ -91,7 +91,7 @@ export const ScaleRangeInput = (props) => {
         style={{
           transform: `translateX(${
             (value / max) * canvasSize.width
-          }px) translateX(-2px)`,
+          }px)`,
           borderRadius: 50,
         }}
       ></Box>

@@ -55,8 +55,7 @@ function DragableView(props) {
       ref={(r) => {
         data.div = r;
       }}
-      // className={`absolute height-100 ${props.className}`}
-
+      
       style={{
         left: (props.value / props.total) * 100 + "%",
         top: 0,

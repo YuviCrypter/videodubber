@@ -1,7 +1,15 @@
 "use client";
 
 import React from "react";
-import { Center, UnstyledButton, Stack, rem, Text, Box } from "@mantine/core";
+import {
+  Center,
+  UnstyledButton,
+  Stack,
+  rem,
+  Text,
+  Box,
+  ScrollArea,
+} from "@mantine/core";
 import {
   IconMenu2,
   IconSearch,
@@ -139,7 +147,7 @@ const LeftNavbar = observer(() => {
   });
 
   return (
-    <Stack
+    <ScrollArea
       h={"100vh"}
       gap={0}
       style={{ borderRight: "1px solid var(--mantine-color-gray-3)" }}
@@ -157,7 +165,7 @@ const LeftNavbar = observer(() => {
       <Stack justify="center" gap={0} my={8}>
         <NavbarLink icon={IconQuestionMark} style={{ borderRadius: "50%" }} />
       </Stack>
-    </Stack>
+    </ScrollArea>
   );
 });
 
